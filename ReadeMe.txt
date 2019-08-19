@@ -1,0 +1,66 @@
+why do we need DRF? 
+    need common tasks with your APIs, such as access control, serialization, rate limiting and more
+
+
+
+Using PollSerializer
+    >>> from polls.serializers import PollSerializer
+    >>> from polls.models import Poll
+    >>> poll_serializer = PollSerializer(data={"question": "Mojito or Caipirinha?","created_by": 1})
+    >>> poll_serializer.is_valid()
+    True
+    >>> poll = poll_serializer.save()
+    >>> poll.pk
+    4
+    >>> Poll.objects.get(pk=4).question
+    'Mojito or Caipirinha?'
+
+
+The login API (page: 35)
+    >>> from django.contrib.auth.models import User
+    >>> from rest_framework.authtoken.models import Token
+    >>> user = User.objects.get(pk=2) # for "nate.silver"
+    >>> Token.objects.create(user=user)
+    <Token: c02db2e6fea47ec86b0918d4301af55be90c90c3>
+
+
+    http://0.0.0.0:8000/login/
+    {
+        "username": "nate.silver",
+        "password": "FiveThirtyEight"
+    }
+
+    response
+    {
+        "token": "c02db2e6fea47ec86b0918d4301af55be90c90c3"
+    }
+
+
+Dockerfile
+requirements.txt
+docker-compose.yml
+
+$ docker-compose run web django-admin startproject project .
+$ docker-compose up
+docker-compose up --build # to rebuild
+$ docker-compose down
+
+
+
+$ docker-compose run web python manage.py startapp polls
+
+$ docker-compose run web python manage.py createsuperuser
+
+$ docker-compose run web python manage.py migrate
+
+$ docker-compose run web python manage.py makemigrations polls
+
+$ docker-compose run web python manage.py migrate
+
+$ docker-compose run web python manage.py shell
+
+$ docker-compose run web python manage.py test polls
+
+$ docker system prune -a # delete all 
+references:
+    https://buildmedia.readthedocs.org/media/pdf/djangoapibook/latest/djangoapibook.pdf
