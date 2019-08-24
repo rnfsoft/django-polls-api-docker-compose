@@ -13,6 +13,14 @@ Using PollSerializer
     >>> Poll.objects.get(pk=4).question
     'Mojito or Caipirinha?'
 
+Choosing the base class to use (page: 28)
+    Pure Django views 
+    APIView (eg. get) when you want to completely customize the behavior.
+    Generics.* when you only want to allow some operations on a model
+    Viewsets.ModelViewSet (Router) when you are going to allow all or most of CRUD operations on a model
+
+
+
 The login API (page: 35)
     >>> from django.contrib.auth.models import User
     >>> from rest_framework.authtoken.models import Token
