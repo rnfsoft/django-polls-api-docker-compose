@@ -1,7 +1,5 @@
-why do we need DRF? 
+Why do we need DRF? 
     need common tasks with your APIs, such as access control, serialization, rate limiting and more
-
-
 
 Using PollSerializer
     >>> from polls.serializers import PollSerializer
@@ -15,14 +13,12 @@ Using PollSerializer
     >>> Poll.objects.get(pk=4).question
     'Mojito or Caipirinha?'
 
-
 The login API (page: 35)
     >>> from django.contrib.auth.models import User
     >>> from rest_framework.authtoken.models import Token
     >>> user = User.objects.get(pk=2) # for "nate.silver"
     >>> Token.objects.create(user=user)
     <Token: c02db2e6fea47ec86b0918d4301af55be90c90c3>
-
 
     http://0.0.0.0:8000/login/
     {
@@ -35,32 +31,39 @@ The login API (page: 35)
         "token": "c02db2e6fea47ec86b0918d4301af55be90c90c3"
     }
 
+Fine grained access control (page: 35)
+    In Postman
+        Add to Headers:
+            KEY: Authorization
+            VALUE: Token c02db2e6fea47ec86b0918d4301af55be90c90c3
 
-Dockerfile
-requirements.txt
-docker-compose.yml
+Adding swagger documentation (page: 47)
 
-$ docker-compose run web django-admin startproject project .
-$ docker-compose up
-docker-compose up --build # to rebuild
-$ docker-compose down
+    Add 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 
+Docker-Compose
 
+    $ docker-compose run web django-admin startproject project .
+    
+    $ docker-compose up
+        docker-compose up --build # to rebuild
+    
+    $ docker-compose down
 
-$ docker-compose run web python manage.py startapp polls
+    $ docker-compose run web python manage.py startapp polls
 
-$ docker-compose run web python manage.py createsuperuser
+    $ docker-compose run web python manage.py makemigrations polls
 
-$ docker-compose run web python manage.py migrate
+    $ docker-compose run web python manage.py migrate
 
-$ docker-compose run web python manage.py makemigrations polls
+    $ docker-compose run web python manage.py createsuperuser
 
-$ docker-compose run web python manage.py migrate
+    $ docker-compose run web python manage.py shell
 
-$ docker-compose run web python manage.py shell
+    $ docker-compose run web python manage.py test polls
 
-$ docker-compose run web python manage.py test polls
+    $ docker system prune -a # delete all
 
-$ docker system prune -a # delete all 
-references:
+References:
     https://buildmedia.readthedocs.org/media/pdf/djangoapibook/latest/djangoapibook.pdf
+    https://www.django-rest-framework.org/community/3.10-announcement/
